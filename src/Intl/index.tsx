@@ -5,7 +5,7 @@ import { enUS, es } from 'date-fns/locale';
 
 import { registerLocale, setDefaultLocale } from 'react-datepicker';
 
-const localeTables: { [index: string]: any } = { 'en-US': enUS, 'es-ES': es };
+const localeTables: Record<string, any> = { 'en-US': enUS, 'es-ES': es };
 
 Object.keys(localeTables).forEach((l) => registerLocale(l, localeTables[l]));
 
