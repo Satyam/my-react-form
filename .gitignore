@@ -104,4 +104,4 @@ dist
 .tern-port
 
 # This module
-/dist
+/build

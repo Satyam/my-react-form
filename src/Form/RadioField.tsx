@@ -2,7 +2,8 @@ import React from 'react';
 import { LabelInputBox, LabelInputBoxProps } from './LabelBox';
 import { Input, InputProps } from 'reactstrap';
 import { RegisterOptions, Controller } from 'react-hook-form';
-// import styles from './styles.module.css';
+// @ts-ignore
+import styles from './styles.module.css';
 export type RadioFieldProps = LabelInputBoxProps &
   InputProps & {
     validation?: RegisterOptions;
@@ -26,12 +27,18 @@ export const RadioField: React.FC<RadioFieldProps> = ({
   // for Input
   ...rest
 }) => (
-  <LabelInputBox name={name} label={label} id={id} help={help} methods={methods}>
+  <LabelInputBox
+    name={name}
+    label={label}
+    id={id}
+    help={help}
+    methods={methods}
+  >
     {({ name, id, hasError, methods }) => (
       <Controller
         render={({ onBlur, onChange, name, value, ref }) => {
           return (
-            <ul className={'' /*styles.radioUl*/}>
+            <ul className={styles.radioUl}>
               {options.map((opt) => (
                 <li key={opt.value}>
                   <Input

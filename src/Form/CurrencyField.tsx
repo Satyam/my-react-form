@@ -24,14 +24,20 @@ export const CurrencyField: React.FC<CurrencyFieldProps> = ({
     <LabelInputBox name={name} label={label} id={id} methods={methods}>
       {({ name, id, hasError, methods }) => (
         <InputGroup>
-          {currencySignPrepend && <InputGroupAddon addonType="prepend">{currencySign}</InputGroupAddon>}
+          {currencySignPrepend && (
+            <InputGroupAddon addonType="prepend">
+              {currencySign}
+            </InputGroupAddon>
+          )}
           <Controller
             render={({ onBlur, onChange, name, value, ref }) => {
               return (
                 <Input
                   name={name}
                   type="text"
-                  onChange={(ev) => onChange(parseFloat(ev.target.value.replace(',', '.')))}
+                  onChange={(ev) =>
+                    onChange(parseFloat(ev.target.value.replace(',', '.')))
+                  }
                   onBlur={onBlur}
                   defaultValue={formatCurrency(value, true)}
                   invalid={hasError}
@@ -44,7 +50,9 @@ export const CurrencyField: React.FC<CurrencyFieldProps> = ({
             control={methods.control}
             rules={validation}
           />
-          {!currencySignPrepend && <InputGroupAddon addonType="append">{currencySign}</InputGroupAddon>}
+          {!currencySignPrepend && (
+            <InputGroupAddon addonType="append">{currencySign}</InputGroupAddon>
+          )}
         </InputGroup>
       )}
     </LabelInputBox>
