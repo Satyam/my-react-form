@@ -7,8 +7,9 @@
     "strict": true,
     "jsx": "react-jsx",
     "esModuleInterop": true,
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "rootDir": "src"
   },
   "include": ["src"],
-  "exclude": ["node_modules", "**/__tests__/*", "**/*.module.css"]
+  "exclude": ["node_modules", "**/__tests__/*"]
 }

@@ -1,3 +1,3 @@
-export * from 'Form';
-export * from 'Icons';
-export * from 'Intl';
+export * from './Form';
+export * from './Icons';
+export * from './Intl';
