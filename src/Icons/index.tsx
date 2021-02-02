@@ -17,7 +17,7 @@ import {
   FaInfoCircle,
 } from 'react-icons/fa';
 import { AiOutlineDollarCircle } from 'react-icons/ai';
-//@ts-ignore
+// @ts-ignore
 import styles from './styles.module.css';
 import { Link } from 'react-router-dom';
 
@@ -205,7 +205,7 @@ export const ButtonSet: React.FC<{
   </div>
 );
 
-export const Checkmark: React.FC<{ value?: Boolean }> = ({ value = false }) =>
+export const Checkmark: React.FC<{ value?: boolean }> = ({ value = false }) =>
   value ? <FaRegCheckSquare /> : <FaRegSquare />;
 
 export const ButtonIconInvoice: React.FC<MyButtonProps> = ({
