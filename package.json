@@ -1,5 +1,5 @@
 {
-  "name": "my-react-form",
+  "name": "@satyam/react-form",
   "version": "1.0.0",
   "description": "My form library with ReactStrap and React Hook Form",
   "main": "build/index.js",
