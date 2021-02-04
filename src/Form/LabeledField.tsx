@@ -2,7 +2,7 @@ import React, { DOMAttributes } from 'react';
 import { LabelBox, LabelBoxProps } from './LabelBox';
 
 import classNames from 'classnames/bind';
-import { Checkmark } from 'Icons';
+import { Checkmark } from '../Icons';
 // @ts-ignore
 import styles from './styles.module.css';
 

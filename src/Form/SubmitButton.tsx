@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'reactstrap';
-import { MyButtonProps } from 'Icons';
+import { MyButtonProps } from '../Icons';
 import { UseFormMethods } from 'react-hook-form';
 
 export type SubmitButtonProps = MyButtonProps & {
@@ -8,13 +8,23 @@ export type SubmitButtonProps = MyButtonProps & {
   methods: UseFormMethods<any>;
 };
 
-export const SubmitButton: React.FC<SubmitButtonProps> = ({ component: Component = Button, methods, ...rest }) => {
+export const SubmitButton: React.FC<SubmitButtonProps> = ({
+  component: Component = Button,
+  methods,
+  ...rest
+}) => {
   const {
     errors,
     formState: { isSubmitting, isDirty },
   } = methods;
 
-  return <Component type="submit" disabled={isSubmitting || !isDirty || !!Object.keys(errors).length} {...rest} />;
+  return (
+    <Component
+      type="submit"
+      disabled={isSubmitting || !isDirty || !!Object.keys(errors).length}
+      {...rest}
+    />
+  );
 };
 
 export default SubmitButton;
