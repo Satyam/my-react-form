@@ -12,11 +12,27 @@ export default {
     name: { control: 'text' },
     label: { control: 'text' },
     help: { control: 'text' },
-    rows: { control: 'number' },
-    type: { control: 'text' },
     value: { control: 'text' },
-    onSubmit: { action: 'submit' },
+    error: { control: 'boolean' },
+    rows: {
+      description: '(only for TextField)',
+      control: 'number',
+    },
+    type: {
+      description: '(only for TextField)',
+      defaultValue: 'text',
+      control: {
+        type: 'select',
+        options: ['text', 'email', 'password', 'search', 'tel', 'url'],
+      },
+    },
+    options: {
+      description: '(only for DropdownField)',
+      control: false,
+    },
   },
+  onSubmit: { control: false, action: 'submit' },
+  FieldComponent: { control: false },
 } as Meta;
 
 const TextFieldTemplate: Story<FormFrameProps> = (args) => (

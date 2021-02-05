@@ -19,7 +19,7 @@ export type FormFrameProps = {
   // for Dropdown
   options?: Record<string, string>;
   value?: any;
-  /*   validation ?? */
+  error?: boolean;
   onSubmit: (value: any) => void;
 };
 
@@ -28,6 +28,7 @@ export const FormFrame: React.FC<FormFrameProps> = ({
   name = 'campo1',
   label = 'Etiqueta',
   value,
+  error,
   onSubmit,
   ...args
 }) => {
@@ -39,6 +40,12 @@ export const FormFrame: React.FC<FormFrameProps> = ({
     if (value) methods.reset({ [name]: value });
     // es lint-disable-next-line react-hooks/exhaustive-deps
   }, [name, value]);
+
+  useEffect(() => {
+    if (error)
+      methods.setError(name, { type: 'manual', message: 'mensaje de error' });
+    else methods.clearErrors();
+  }, [name, error]);
 
   return (
     <IntlProvider locale="es-ES">
