@@ -1,15 +1,13 @@
 // Library imports
 import React, { useEffect, useState } from 'react';
-import { Form } from 'reactstrap';
+import { Form, Container, Row, Col } from 'reactstrap';
 import { useForm, SubmitHandler, Resolver } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 // My own library imports
 import { SubmitButton } from '../../Form';
 import { IntlProvider } from '../../Intl';
 
-import Page from '../Page';
 export type FormFrameProps = {
   FieldComponent: React.ElementType;
   id?: string;
@@ -21,19 +19,31 @@ export type FormFrameProps = {
 
   // to allow for value to be displayed
   onSubmit: SubmitHandler<Record<string, any>>;
+};
 
-  // For TextField
-  rows?: number;
-  type?: string;
+export const SUCCESS = 'Success';
+export const FAIL = 'Fail';
 
-  // for Dropdown
-  options?: Record<string, string>;
+export const argsFormFrame = {
+  id: { control: 'text' },
+  name: { control: 'text', defaultValue: 'campo1' },
+  label: { control: 'text', defaultValue: 'Etiqueta' },
+  help: { control: 'text' },
+  value: { control: 'text' },
+  validation: {
+    defaultValue: SUCCESS,
+    control: {
+      type: 'select',
+      options: [SUCCESS, FAIL],
+    },
+  },
+  onSubmit: { control: false, action: 'submit' },
+  schema: { control: false },
 };
 
 export const FormFrame: React.FC<FormFrameProps> = ({
   FieldComponent,
-  name = 'campo1',
-  label = 'Etiqueta',
+  name,
   value,
   schema,
   onSubmit,
@@ -54,22 +64,24 @@ export const FormFrame: React.FC<FormFrameProps> = ({
   useEffect(() => {
     if (schema) setResolver(() => yupResolver(schema));
     else setResolver(undefined);
-    console.log(resolver, schema);
+    // console.log(resolver, schema);
   }, [schema]);
 
+  // console.log(
+  //   JSON.stringify({ ...methods.formState, values: methods.watch() }, null, 2)
+  // );
   return (
     <IntlProvider locale="es-ES">
-      <Page>
-        <Form onSubmit={methods.handleSubmit(onSubmit)}>
-          <FieldComponent
-            name={name}
-            label={label}
-            {...args}
-            methods={methods}
-          />
-          <SubmitButton methods={methods}>Submit</SubmitButton>
-        </Form>
-      </Page>
+      <Container fluid>
+        <Row>
+          <Col sm="12" md={{ size: 8, offset: 2 }}>
+            <Form onSubmit={methods.handleSubmit(onSubmit)}>
+              <FieldComponent name={name} {...args} methods={methods} />
+              <SubmitButton methods={methods}>Submit</SubmitButton>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
     </IntlProvider>
   );
 };
