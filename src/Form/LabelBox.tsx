@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormGroup, Label, FormFeedback, FormText, Col } from 'reactstrap';
 import { UseFormMethods } from 'react-hook-form';
 
@@ -25,8 +25,11 @@ let counter = 0;
 export const LabelInputBox: React.FC<
   LabelInputBoxProps & { children: (props: RenderProps) => React.ReactNode }
 > = ({ name, label, id, help, methods, children }) => {
-  const [actualId] = useState(id || `F_${counter}`);
-  counter = (counter + 1) % Number.MAX_SAFE_INTEGER;
+  const [actualId, setId] = useState<string>();
+  useEffect(() => {
+    setId(id || `F_${counter}`);
+    if (!id) counter = (counter + 1) % Number.MAX_SAFE_INTEGER;
+  }, [id]);
   const { errors } = methods;
   const hasError = name in errors;
   const error = hasError && (errors[name]?.message || errors[name]);
@@ -51,7 +54,7 @@ export const LabelBox: React.FC<LabelBoxProps> = ({
       </Label>
       <Col xs={12} lg={8}>
         {children}
-        {help && <FormText>{help}</FormText>}
+        {help && <FormText color="info">{help}</FormText>}
       </Col>
     </FormGroup>
   );
