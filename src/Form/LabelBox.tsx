@@ -36,7 +36,10 @@ export const LabelInputBox: React.FC<
   return (
     <LabelBox label={label} help={help} htmlFor={actualId}>
       {children({ id: actualId, name, methods, hasError })}
-      <FormFeedback>{error}</FormFeedback>
+      {/* See: https://github.com/reactstrap/reactstrap/issues/1619 */}
+      <FormFeedback className={hasError ? 'd-block' : 'd-none'}>
+        {error}
+      </FormFeedback>
     </LabelBox>
   );
 };
