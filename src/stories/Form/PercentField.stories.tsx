@@ -9,11 +9,13 @@ export default {
   component: FormFrame,
   argTypes: {
     ...argsFormFrame,
+
+    value: { control: 'number', defaultValue: 0.1 },
+
     min: {
       control: 'number',
       defaultValue: 0.2,
     },
-
     max: {
       control: 'number',
       defaultValue: 0.8,
@@ -40,7 +42,7 @@ const schemas = (name: string, min: number, max: number): yup.AnyObjectSchema =>
   });
 
 export const PercentField: Story<
-  FormFrameProps & { min: number; max: number }
+  FormFrameProps & { value: number; min: number; max: number }
 > = ({ min, max, ...args }) => (
   <FormFrame schema={schemas(args.name, min, max)} {...args} />
 );

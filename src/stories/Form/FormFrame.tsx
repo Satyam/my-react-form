@@ -26,7 +26,6 @@ export const argsFormFrame = {
   name: { control: 'text', defaultValue: 'campo1' },
   label: { control: 'text', defaultValue: 'Etiqueta' },
   help: { control: 'text' },
-  value: { control: 'text' },
   onSubmit: { control: false, action: 'submit' },
   schema: { control: false },
 };

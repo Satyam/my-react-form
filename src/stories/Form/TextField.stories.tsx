@@ -10,6 +10,8 @@ export default {
   argTypes: {
     ...argsFormFrame,
 
+    value: { control: 'text', defaultValue: 'prueba' },
+
     rows: {
       description: 'If type is "text", it will switch to a <textarea>',
       control: 'number',
@@ -38,7 +40,12 @@ const schemas = (name: string, minLength: number): yup.AnyObjectSchema =>
   });
 
 export const TextField: Story<
-  FormFrameProps & { minLength?: number; rows?: number; type?: string }
+  FormFrameProps & {
+    value: string;
+    minLength?: number;
+    rows?: number;
+    type?: string;
+  }
 > = ({ minLength = 0, ...args }) => {
   return <FormFrame schema={schemas(args.name, minLength)} {...args} />;
 };
