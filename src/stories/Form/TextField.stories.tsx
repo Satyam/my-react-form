@@ -1,13 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import * as yup from 'yup';
-import {
-  FormFrame,
-  FormFrameProps,
-  argsFormFrame,
-  SUCCESS,
-  FAIL,
-} from './FormFrame';
+import { FormFrame, FormFrameProps, argsFormFrame } from './FormFrame';
 import { TextField as TF } from '../../Form';
 
 export default {
@@ -17,16 +11,19 @@ export default {
     ...argsFormFrame,
 
     rows: {
-      description: '(only for TextField)',
+      description: 'If type is "text", it will switch to a <textarea>',
       control: 'number',
     },
     type: {
-      description: '(only for TextField)',
+      description: 'rows will only work with type=text',
       defaultValue: 'text',
       control: {
         type: 'select',
         options: ['text', 'email', 'password', 'search', 'tel', 'url'],
       },
+    },
+    minLength: {
+      control: 'number',
     },
     FieldComponent: {
       control: false,
@@ -35,22 +32,16 @@ export default {
   },
 } as Meta;
 
-const schemas = (name: string, success: boolean): yup.AnyObjectSchema =>
+const schemas = (name: string, minLength: number): yup.AnyObjectSchema =>
   yup.object({
-    [name]: yup
-      .string()
-      .test(
-        success ? SUCCESS : FAIL,
-        success ? 'This message should never come up' : 'Error message',
-        () => success
-      ),
+    [name]: yup.string().min(minLength),
   });
 
 export const TextField: Story<
-  FormFrameProps & { validation: string; rows?: number; type?: string }
-> = ({ validation, ...args }) => (
-  <FormFrame schema={schemas(args.name, validation === SUCCESS)} {...args} />
-);
+  FormFrameProps & { minLength?: number; rows?: number; type?: string }
+> = ({ minLength = 0, ...args }) => {
+  return <FormFrame schema={schemas(args.name, minLength)} {...args} />;
+};
 
 TextField.storyName = 'TextField';
 TextField.args = {

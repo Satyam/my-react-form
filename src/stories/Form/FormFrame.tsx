@@ -21,22 +21,12 @@ export type FormFrameProps = {
   onSubmit: SubmitHandler<Record<string, any>>;
 };
 
-export const SUCCESS = 'Success';
-export const FAIL = 'Fail';
-
 export const argsFormFrame = {
   id: { control: 'text' },
   name: { control: 'text', defaultValue: 'campo1' },
   label: { control: 'text', defaultValue: 'Etiqueta' },
   help: { control: 'text' },
   value: { control: 'text' },
-  validation: {
-    defaultValue: SUCCESS,
-    control: {
-      type: 'select',
-      options: [SUCCESS, FAIL],
-    },
-  },
   onSubmit: { control: false, action: 'submit' },
   schema: { control: false },
 };

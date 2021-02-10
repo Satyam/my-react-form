@@ -1,13 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import * as yup from 'yup';
-import {
-  FormFrame,
-  FormFrameProps,
-  argsFormFrame,
-  SUCCESS,
-  FAIL,
-} from './FormFrame';
+import { FormFrame, FormFrameProps, argsFormFrame } from './FormFrame';
 import { PercentField as PF } from '../../Form';
 
 export default {
@@ -15,7 +9,15 @@ export default {
   component: FormFrame,
   argTypes: {
     ...argsFormFrame,
+    min: {
+      control: 'number',
+      defaultValue: 0.2,
+    },
 
+    max: {
+      control: 'number',
+      defaultValue: 0.8,
+    },
     FieldComponent: {
       control: false,
       description: 'Form/PercentField.tsx',
@@ -23,22 +25,24 @@ export default {
   },
 } as Meta;
 
-const schemas = (name: string, success: boolean): yup.AnyObjectSchema =>
+const schemas = (name: string, min: number, max: number): yup.AnyObjectSchema =>
   yup.object({
     [name]: yup
       .number()
-      .test(
-        success ? SUCCESS : FAIL,
-        success ? 'This message should never come up' : 'Error message',
-        () => success
+      .min(
+        min,
+        (opt) => `El porcentaje debe ser igual o mayor que ${opt.min * 100}%`
+      )
+      .max(
+        max,
+        (opt) => `El porcentaje debe ser menor o igual que ${opt.max * 100}%`
       ),
   });
 
-export const PercentField: Story<FormFrameProps & { validation: string }> = ({
-  validation,
-  ...args
-}) => (
-  <FormFrame schema={schemas(args.name, validation === SUCCESS)} {...args} />
+export const PercentField: Story<
+  FormFrameProps & { min: number; max: number }
+> = ({ min, max, ...args }) => (
+  <FormFrame schema={schemas(args.name, min, max)} {...args} />
 );
 
 PercentField.storyName = 'PercentField';
