@@ -4,22 +4,27 @@ import * as yup from 'yup';
 import { FormFrame, FormFrameProps, argsFormFrame } from './FormFrame';
 import { DateField as DF } from '../../Form';
 
+const DAYS_10 = 1000 * 3600 * 24 * 10;
+const now = Date.now();
+const minDate = new Date(now - DAYS_10);
+const maxDate = new Date(now + DAYS_10);
+
 export default {
   title: 'Form/DateField',
   component: FormFrame,
   argTypes: {
     ...argsFormFrame,
 
-    value: { control: 'date', defaultValue: Date.now() },
+    value: { control: 'date', defaultValue: now },
 
     minDate: {
       control: 'date',
-      defaultValue: new Date(Date.now() - 1000 * 3600 * 24 * 10),
+      defaultValue: minDate,
     },
 
     maxDate: {
       control: 'date',
-      defaultValue: new Date(Date.now() + 1000 * 3600 * 24 * 10),
+      defaultValue: maxDate,
     },
     FieldComponent: {
       control: false,
@@ -54,8 +59,11 @@ const schemas = (
 
 export const DateField: Story<
   FormFrameProps & { value: Date; minDate: Date; maxDate: Date }
-> = ({ minDate, maxDate, ...args }) => (
-  <FormFrame schema={schemas(args.name, minDate, maxDate)} {...args} />
+> = (args) => (
+  <FormFrame
+    schema={schemas(args.name, args.minDate, args.maxDate)}
+    {...args}
+  />
 );
 
 DateField.storyName = 'DateField';
