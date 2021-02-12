@@ -19,7 +19,12 @@ export default {
           label: 'Dos',
         },
         { value: 3, label: 'Tres', disabled: true },
+        { value: 4, label: 'Cuatro' },
       ],
+    },
+    noOption: {
+      control: 'boolean',
+      defaultValue: false,
     },
     value: { control: 'number', defaultValue: 2 },
   },
