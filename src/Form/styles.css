@@ -1,17 +1,29 @@
-.labeled-pre {
+.satyam-labeled-pre {
   white-space: pre-line;
   height: auto;
 }
-.readonly {
+.satyam-readonly {
   background-color: var(--light);
   border: none;
 }
 
-.radioUl {
+.satyam-radio-ul {
   list-style-type: none;
   border: silver solid thin;
   border-radius: 0.25rem;
   padding-top: 0.4rem;
   padding-bottom: 0.4rem;
   margin-bottom: 0;
+}
+
+.satyam-checkboxField .invalid-feedback {
+  margin-top: 1rem;
+}
+
+.satyam-checkboxField input {
+  margin-left: 0;
+}
+
+.satyam-checkboxField .text-info {
+  margin-top: 1rem;
 }

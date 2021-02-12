@@ -3,10 +3,7 @@ import { LabelBox, LabelBoxProps } from './LabelBox';
 
 import classNames from 'classnames/bind';
 import { Checkmark } from '../Icons';
-// @ts-ignore
-import styles from './styles.module.css';
-
-const cx = classNames.bind(styles);
+import './styles.css';
 
 export type LabeledTextProps = LabelBoxProps & {
   pre?: boolean;
@@ -23,10 +20,10 @@ export const LabeledText: React.FC<LabeledTextProps> = ({
 }) => (
   <LabelBox label={label} help={help}>
     <div
-      className={cx(
+      className={classNames(
         'form-control',
-        'readonly',
-        { 'labeled-pre': pre },
+        'satyam-readonly',
+        { 'satyam-labeled-pre': pre },
         className
       )}
       {...rest}

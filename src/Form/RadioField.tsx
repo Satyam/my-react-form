@@ -2,8 +2,8 @@ import React from 'react';
 import { LabelInputBox, LabelInputBoxProps } from './LabelBox';
 import { Input, InputProps } from 'reactstrap';
 import { RegisterOptions, Controller } from 'react-hook-form';
-// @ts-ignore
-import styles from './styles.module.css';
+import './styles.css';
+
 export type RadioFieldProps = LabelInputBoxProps &
   InputProps & {
     validation?: RegisterOptions;
@@ -38,7 +38,7 @@ export const RadioField: React.FC<RadioFieldProps> = ({
       <Controller
         render={({ onBlur, onChange, name, value, ref }) => {
           return (
-            <ul className={styles.radioUl}>
+            <ul className="satyam-radio-ul">
               {options.map((opt) => (
                 <li key={opt.value}>
                   <Input
