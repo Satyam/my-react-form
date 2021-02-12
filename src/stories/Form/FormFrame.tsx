@@ -42,12 +42,15 @@ export const FormFrame: React.FC<
   const [resolver, setResolver] = useState<Resolver | undefined>();
 
   const methods = useForm({
-    defaultValues: { [name]: value },
     resolver: (...args) => resolver(...args),
   });
 
   useEffect(() => {
-    if (value) methods.reset({ [name]: value });
+    if (typeof value !== 'undefined')
+      methods.setValue(name, value, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
     // es lint-disable-next-line react-hooks/exhaustive-deps
   }, [name, value]);
 
