@@ -42,7 +42,8 @@ export const FormFrame: React.FC<
   const [resolver, setResolver] = useState<Resolver | undefined>();
 
   const methods = useForm({
-    resolver: (...args) => resolver(...args),
+    resolver: resolver ? (...args) => resolver(...args) : undefined,
+    defaultValues: { [name]: value },
   });
 
   useEffect(() => {
