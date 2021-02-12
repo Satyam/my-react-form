@@ -20,10 +20,6 @@ export default {
       control: 'number',
       defaultValue: 0.8,
     },
-    FieldComponent: {
-      control: false,
-      description: 'Form/PercentField.tsx',
-    },
   },
 } as Meta;
 
@@ -44,10 +40,11 @@ const schemas = (name: string, min: number, max: number): yup.AnyObjectSchema =>
 export const PercentField: Story<
   FormFrameProps & { value: number; min: number; max: number }
 > = ({ min, max, ...args }) => (
-  <FormFrame schema={schemas(args.name, min, max)} {...args} />
+  <FormFrame
+    FieldComponent={PF}
+    schema={schemas(args.name, min, max)}
+    {...args}
+  />
 );
 
 PercentField.storyName = 'PercentField';
-PercentField.args = {
-  FieldComponent: PF,
-};

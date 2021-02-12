@@ -1,7 +1,12 @@
 // Library imports
 import React, { useEffect, useState } from 'react';
 import { Form, Container, Row, Col } from 'reactstrap';
-import { useForm, SubmitHandler, Resolver } from 'react-hook-form';
+import {
+  useForm,
+  SubmitHandler,
+  SubmitErrorHandler,
+  Resolver,
+} from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 // My own library imports
@@ -9,16 +14,11 @@ import { SubmitButton } from '../../Form';
 import { IntlProvider } from '../../Intl';
 
 export type FormFrameProps = {
-  FieldComponent: React.ElementType;
   id?: string;
   name: string;
   label?: string;
   help?: string;
   value?: any;
-  schema?: yup.AnyObjectSchema;
-
-  // to allow for value to be displayed
-  onSubmit: SubmitHandler<Record<string, any>>;
 };
 
 export const argsFormFrame = {
@@ -26,18 +26,19 @@ export const argsFormFrame = {
   name: { control: 'text', defaultValue: 'campo1' },
   label: { control: 'text', defaultValue: 'Etiqueta' },
   help: { control: 'text' },
-  onSubmit: { control: false, action: 'submit' },
-  schema: { control: false },
+  FieldComponent: { table: { disable: true } },
+  schema: { table: { disable: true } },
 };
 
-export const FormFrame: React.FC<FormFrameProps> = ({
-  FieldComponent,
-  name,
-  value,
-  schema,
-  onSubmit,
-  ...args
-}) => {
+const onSubmit: SubmitHandler<any> = (data) => console.log(data);
+const onError: SubmitErrorHandler<any> = (err) => console.error(err);
+
+export const FormFrame: React.FC<
+  FormFrameProps & {
+    FieldComponent: React.ElementType;
+    schema?: yup.AnyObjectSchema;
+  }
+> = ({ FieldComponent, name, value, schema, ...args }) => {
   const [resolver, setResolver] = useState<Resolver | undefined>();
 
   const methods = useForm({
@@ -64,7 +65,7 @@ export const FormFrame: React.FC<FormFrameProps> = ({
       <Container fluid>
         <Row>
           <Col sm="12" md={{ size: 8, offset: 2 }}>
-            <Form onSubmit={methods.handleSubmit(onSubmit)}>
+            <Form onSubmit={methods.handleSubmit(onSubmit, onError)}>
               <FieldComponent name={name} {...args} methods={methods} />
               <SubmitButton methods={methods}>Submit</SubmitButton>
             </Form>

@@ -2,10 +2,10 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import * as yup from 'yup';
 import { FormFrame, FormFrameProps, argsFormFrame } from './FormFrame';
-import { RadioField as RF } from '../../Form';
+import { DropdownField as DF } from '../../Form';
 
 export default {
-  title: 'Form/RadioField',
+  title: 'Form/DropdownField',
   component: FormFrame,
   argTypes: {
     ...argsFormFrame,
@@ -19,7 +19,6 @@ export default {
           label: 'Dos',
         },
         { value: 3, label: 'Tres', disabled: true },
-        { value: 4, label: 'Cuatro' },
       ],
     },
     value: { control: 'number', defaultValue: 2 },
@@ -28,10 +27,10 @@ export default {
 
 const schemas = (name: string): yup.AnyObjectSchema =>
   yup.object({
-    [name]: yup.number().oneOf([2, 4]),
+    [name]: yup.number().oneOf([2]),
   });
 
-export const RadioField: Story<
+export const DropdownField: Story<
   FormFrameProps & {
     options: {
       label: string;
@@ -42,8 +41,8 @@ export const RadioField: Story<
   }
 > = ({ ...args }) => {
   return (
-    <FormFrame FieldComponent={RF} schema={schemas(args.name)} {...args} />
+    <FormFrame FieldComponent={DF} schema={schemas(args.name)} {...args} />
   );
 };
 
-RadioField.storyName = 'RadioField';
+DropdownField.storyName = 'DropdownField';

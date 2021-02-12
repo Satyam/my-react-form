@@ -13,11 +13,6 @@ export default {
     value: { control: 'boolean', defaultValue: false },
 
     fail: { control: 'boolean', defaultValue: false },
-
-    FieldComponent: {
-      control: false,
-      description: 'Form/CheckboxField.tsx',
-    },
   },
 } as Meta;
 
@@ -38,10 +33,13 @@ export const CheckboxField: Story<
     fail: boolean;
   }
 > = ({ fail, ...args }) => {
-  return <FormFrame schema={schemas(args.name, fail)} {...args} />;
+  return (
+    <FormFrame
+      FieldComponent={CF}
+      schema={schemas(args.name, fail)}
+      {...args}
+    />
+  );
 };
 
 CheckboxField.storyName = 'CheckboxField';
-CheckboxField.args = {
-  FieldComponent: CF,
-};

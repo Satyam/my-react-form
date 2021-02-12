@@ -26,10 +26,6 @@ export default {
       control: 'date',
       defaultValue: maxDate,
     },
-    FieldComponent: {
-      control: false,
-      description: 'Form/DateField.tsx',
-    },
   },
 } as Meta;
 
@@ -61,12 +57,10 @@ export const DateField: Story<
   FormFrameProps & { value: Date; minDate: Date; maxDate: Date }
 > = (args) => (
   <FormFrame
+    FieldComponent={DF}
     schema={schemas(args.name, args.minDate, args.maxDate)}
     {...args}
   />
 );
 
 DateField.storyName = 'DateField';
-DateField.args = {
-  FieldComponent: DF,
-};

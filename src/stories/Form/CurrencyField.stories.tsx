@@ -20,10 +20,6 @@ export default {
       control: 'number',
       defaultValue: 10000,
     },
-    FieldComponent: {
-      control: false,
-      description: 'Form/CurrencyField.tsx',
-    },
   },
 } as Meta;
 
@@ -35,10 +31,11 @@ const schemas = (name: string, min: number, max: number): yup.AnyObjectSchema =>
 export const CurrencyField: Story<
   FormFrameProps & { value: number; min: number; max: number }
 > = ({ min, max, ...args }) => (
-  <FormFrame schema={schemas(args.name, min, max)} {...args} />
+  <FormFrame
+    FieldComponent={CF}
+    schema={schemas(args.name, min, max)}
+    {...args}
+  />
 );
 
 CurrencyField.storyName = 'CurrencyField';
-CurrencyField.args = {
-  FieldComponent: CF,
-};

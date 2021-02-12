@@ -27,10 +27,6 @@ export default {
     minLength: {
       control: 'number',
     },
-    FieldComponent: {
-      control: false,
-      description: 'Form/TextField.tsx',
-    },
   },
 } as Meta;
 
@@ -47,10 +43,13 @@ export const TextField: Story<
     type?: string;
   }
 > = ({ minLength = 0, ...args }) => {
-  return <FormFrame schema={schemas(args.name, minLength)} {...args} />;
+  return (
+    <FormFrame
+      schema={schemas(args.name, minLength)}
+      FieldComponent={TF}
+      {...args}
+    />
+  );
 };
 
 TextField.storyName = 'TextField';
-TextField.args = {
-  FieldComponent: TF,
-};
