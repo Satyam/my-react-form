@@ -46,7 +46,7 @@ export const MyButton: React.FC<
     to={href}
   >
     <Icon />
-    {children && <span className={styles.label}>{children}</span>}
+    {children && <span className={cx('label')}>{children}</span>}
   </Button>
 );
 
@@ -55,6 +55,7 @@ export type IconProps = React.ImgHTMLAttributes<HTMLImageElement> & {
   color?: BootstrapColor;
   isButton?: boolean;
   disabled?: boolean;
+  size?: string;
 };
 export const Icon: React.FC<IconProps> = ({
   Component,
@@ -79,7 +80,7 @@ export const Icon: React.FC<IconProps> = ({
 export const IconAdd: React.FC<Omit<IconProps, 'Component'>> = ({
   color = 'primary',
   ...props
-}) => <Icon Component={FaPlusCircle} {...props} />;
+}) => <Icon Component={FaPlusCircle} color={color} {...props} />;
 
 export const ButtonIconAdd: React.FC<MyButtonProps> = ({
   children,
@@ -95,7 +96,7 @@ export const ButtonIconAdd: React.FC<MyButtonProps> = ({
 export const IconDelete: React.FC<Omit<IconProps, 'Component'>> = ({
   color = 'danger',
   ...props
-}) => <Icon Component={FaRegTrashAlt} {...props} />;
+}) => <Icon Component={FaRegTrashAlt} color={color} {...props} />;
 
 export const ButtonIconDelete: React.FC<MyButtonProps> = ({
   children,
@@ -111,7 +112,7 @@ export const ButtonIconDelete: React.FC<MyButtonProps> = ({
 export const IconEdit: React.FC<Omit<IconProps, 'Component'>> = ({
   color = 'secondary',
   ...props
-}) => <Icon Component={FaRegEdit} {...props} />;
+}) => <Icon Component={FaRegEdit} color={color} {...props} />;
 
 export const ButtonIconEdit: React.FC<MyButtonProps> = ({
   children,
@@ -194,7 +195,7 @@ export const IconWarning: React.FC<Omit<IconProps, 'Component'>> = ({
 export const IconStop: React.FC<Omit<IconProps, 'Component'>> = ({
   color = 'danger',
   ...props
-}) => <Icon Component={FaExclamationCircle} {...props} />;
+}) => <Icon Component={FaExclamationCircle} color={color} {...props} />;
 
 export const ButtonSet: React.FC<{
   className?: string;
