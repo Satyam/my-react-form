@@ -28,7 +28,7 @@ export const CheckboxField: React.FC<CheckboxFieldProps> = ({
     id={id}
     help={help}
     methods={methods}
-    className="satyam-checkboxField"
+    className="satyam-form-checkboxField"
   >
     {({ name, id, hasError, methods }) => (
       <Input

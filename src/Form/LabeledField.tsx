@@ -22,8 +22,8 @@ export const LabeledText: React.FC<LabeledTextProps> = ({
     <div
       className={classNames(
         'form-control',
-        'satyam-readonly',
-        { 'satyam-labeled-pre': pre },
+        'satyam-form-readonly',
+        { 'satyam-form-labeled-pre': pre },
         className
       )}
       {...rest}

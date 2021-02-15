@@ -1,13 +1,13 @@
-.satyam-labeled-pre {
+.satyam-form-labeled-pre {
   white-space: pre-line;
   height: auto;
 }
-.satyam-readonly {
+.satyam-form-readonly {
   background-color: var(--light);
   border: none;
 }
 
-.satyam-radio-ul {
+.satyam-form-radio-ul {
   list-style-type: none;
   border: silver solid thin;
   border-radius: 0.25rem;
@@ -16,14 +16,14 @@
   margin-bottom: 0;
 }
 
-.satyam-checkboxField .invalid-feedback {
+.satyam-form-checkboxField .invalid-feedback {
   margin-top: 1rem;
 }
 
-.satyam-checkboxField input {
+.satyam-form-checkboxField input {
   margin-left: 0;
 }
 
-.satyam-checkboxField .text-info {
+.satyam-form-checkboxField .text-info {
   margin-top: 1rem;
 }

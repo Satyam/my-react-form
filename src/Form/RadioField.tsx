@@ -38,7 +38,7 @@ export const RadioField: React.FC<RadioFieldProps> = ({
       <Controller
         render={({ onBlur, onChange, name, value, ref }) => {
           return (
-            <ul className="satyam-radio-ul">
+            <ul className="satyam-form-radio-ul">
               {options.map((opt) => (
                 <li key={opt.value}>
                   <Input
