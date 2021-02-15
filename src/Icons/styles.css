@@ -1,0 +1,56 @@
+.satyam-icon-active:hover {
+  filter: saturate(30%);
+}
+
+.satyam-icon-disabled {
+  opacity: 0.5;
+}
+
+.satyam-icon-primary {
+  color: var(--primary);
+}
+
+.satyam-icon-secondary {
+  color: var(--secondary);
+}
+
+.satyam-icon-success {
+  color: var(--success);
+}
+
+.satyam-icon-danger {
+  color: var(--danger);
+}
+
+.satyam-icon-warning {
+  color: var(--warning);
+}
+
+.satyam-icon-info {
+  color: var(--info);
+}
+
+.satyam-icon-light {
+  color: var(--light);
+}
+
+.satyam-icon-dark {
+  color: var(--dark);
+}
+
+.satyam-icon-body {
+  color: var(--body);
+}
+
+.satyam-icon-buttonSet button,
+.satyam-icon-buttonSet a {
+  margin-left: 0.5em;
+}
+
+.satyam-icon-buttonSet button:first-child,
+.satyam-icon-buttonSet a:first-child {
+  margin-left: 0;
+}
+.satyam-icon-label {
+  margin-left: 0.5rem;
+}

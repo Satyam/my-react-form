@@ -17,16 +17,14 @@ import {
   FaInfoCircle,
 } from 'react-icons/fa';
 import { AiOutlineDollarCircle } from 'react-icons/ai';
-// @ts-ignore
-import styles from './styles.module.css';
+
+import './styles.css';
 import { Link } from 'react-router-dom';
 
 export type MyButtonProps = {
   color?: BootstrapColor;
   href?: string;
 } & Omit<ButtonProps, 'color'>;
-
-const cx = classNames.bind(styles);
 
 export const MyButton: React.FC<
   MyButtonProps & { Icon: React.ElementType }
@@ -46,7 +44,7 @@ export const MyButton: React.FC<
     to={href}
   >
     <Icon />
-    {children && <span className={cx('label')}>{children}</span>}
+    {children && <span className="satyam-icon-label">{children}</span>}
   </Button>
 );
 
@@ -67,10 +65,10 @@ export const Icon: React.FC<IconProps> = ({
   ...props
 }) => (
   <Component
-    className={cx(className, {
-      'active-icon': isButton && !disabled,
-      [`icon-${color}`]: color,
-      disabled: disabled,
+    className={classNames(className, {
+      'satyam-icon-active': isButton && !disabled,
+      [`satyam-icon-${color}`]: color,
+      'satyam-icon-disabled': disabled,
     })}
     onClick={disabled ? undefined : onClick}
     {...props}
@@ -201,7 +199,13 @@ export const ButtonSet: React.FC<{
   className?: string;
   size?: BootstrapSize;
 }> = ({ className, children, size, ...rest }) => (
-  <div className={cx('buttonSet', { [`btn-group-${size}`]: size }, className)}>
+  <div
+    className={classNames(
+      'satyam-icon-buttonSet',
+      { [`btn-group-${size}`]: size },
+      className
+    )}
+  >
     {children}
   </div>
 );
