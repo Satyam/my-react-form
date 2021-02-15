@@ -3,7 +3,6 @@ import resolve from '@rollup/plugin-node-resolve';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import typescript from 'rollup-plugin-typescript2';
 import postcss from 'rollup-plugin-postcss';
-import autoprefixer from 'autoprefixer';
 import packageJson from './package.json';
 
 export default {
@@ -20,14 +19,5 @@ export default {
       sourcemap: true,
     },
   ],
-  plugins: [
-    postcss({
-      plugins: [autoprefixer()],
-      modules: true,
-    }),
-    peerDepsExternal(),
-    resolve(),
-    commonjs(),
-    typescript(),
-  ],
+  plugins: [postcss(), peerDepsExternal(), resolve(), commonjs(), typescript()],
 };
