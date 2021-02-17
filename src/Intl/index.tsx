@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useMemo } from 'react';
 
 import { format } from 'date-fns';
 import { enUS, es } from 'date-fns/locale';
+import { getCurrency } from 'locale-currency';
 
 import { registerLocale, setDefaultLocale } from 'react-datepicker';
 
@@ -20,6 +21,7 @@ type intlType = {
   currencySign: string;
   currencySignPrepend: boolean;
   currencyDecimals: number;
+  getCurrencyForCountry: (locale: string) => string;
 };
 
 const notImplemented = () => {
@@ -31,12 +33,13 @@ const initialValues = {
   setLocale: notImplemented,
   locale: navigator.language,
   formatDate: notImplemented,
-  currency: 'EUR',
+  currency: getCurrency(navigator.language),
   setCurrency: notImplemented,
   formatCurrency: notImplemented,
   currencySign: '$',
   currencySignPrepend: true,
   currencyDecimals: 2,
+  getCurrencyForCountry: getCurrency,
 };
 
 export const IntlContext = createContext<intlType>(initialValues);
@@ -46,9 +49,11 @@ const currRegExp = /(.*)\s*12(.)(\d*)\s*(.*)/;
 export const IntlProvider: React.FC<{
   locale?: string;
   currency?: string;
-}> = ({ locale: l = navigator.language, currency: c = 'EUR', children }) => {
+}> = ({ locale: l = navigator.language, currency: c, children }) => {
   const [locale, setLocale] = useState(l);
-  const [currency, setCurrency] = useState(c);
+  const [currency, setCurrency] = useState(
+    c || getCurrency(l || navigator.language)
+  );
 
   const ctx = useMemo<intlType>(() => {
     const currFormatter = new Intl.NumberFormat(locale, {
@@ -92,6 +97,7 @@ export const IntlProvider: React.FC<{
       currencySign: sampleParts[1] || sampleParts[4],
       currencySignPrepend: !!sampleParts[1],
       currencyDecimals,
+      getCurrencyForCountry: getCurrency,
     };
   }, [locale, currency]);
 
