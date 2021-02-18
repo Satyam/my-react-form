@@ -56,21 +56,55 @@ export const IntlProvider: React.FC<{
   );
 
   const ctx = useMemo<intlType>(() => {
+    // for DatePicker
+    setDefaultLocale(locale);
+
     const currFormatter = new Intl.NumberFormat(locale, {
       style: 'currency',
       currency,
     });
 
-    const sample = currFormatter.format(12.345);
-    const sampleParts = currRegExp.exec(sample) || [
-      '12,35 €',
-      '',
-      ',',
-      '35',
-      '€',
-    ];
-    setDefaultLocale(locale);
-    const currencyDecimals = sampleParts[3].length;
+    const {
+      currencyDecimals,
+      currencySign,
+      currencySignPrepend,
+    } = currFormatter.formatToParts(12.345).reduce<{
+      currencyDecimals: number;
+      currencySign: string;
+      currencySignPrepend: boolean;
+      // n is auxiliary, to be ignored
+      n: boolean;
+    }>(
+      (ps, { type, value }) => {
+        switch (type) {
+          case 'integer':
+            return {
+              ...ps,
+              n: true,
+            };
+          case 'fraction':
+            return {
+              ...ps,
+              currencyDecimals: value.length,
+            };
+          case 'currency':
+            return {
+              ...ps,
+              currencySign: value,
+              currencySignPrepend: !ps.n,
+            };
+          default:
+            return ps;
+        }
+      },
+      {
+        currencyDecimals: 0,
+        currencySign: '',
+        currencySignPrepend: false,
+        n: false,
+      }
+    );
+
     const plainCurrencyFormatter = new Intl.NumberFormat(locale, {
       style: 'decimal',
       minimumFractionDigits: currencyDecimals,
@@ -94,10 +128,10 @@ export const IntlProvider: React.FC<{
             ? plainCurrencyFormatter.format(value)
             : currFormatter.format(value)
           : '',
-      currencySign: sampleParts[1] || sampleParts[4],
-      currencySignPrepend: !!sampleParts[1],
-      currencyDecimals,
       getCurrencyForCountry: getCurrency,
+      currencyDecimals,
+      currencySign,
+      currencySignPrepend,
     };
   }, [locale, currency]);
 
